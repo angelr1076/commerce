@@ -1,0 +1,115 @@
+{% extends "auctions/layout.html" %} {% block body %} {% load humanize %}
+<div class="container d-flex mt-5 p-2">
+    {% if context.item %}
+    <div class="alert alert-success mx-auto text-center lead w-25" role="alert">
+        <h4 class="alert-heading">{{ context.listing.listing_title }} is on your watchlist.</h4>
+    </div>
+    {% endif %} {% if context.winner == request.user %}
+    <div class="alert alert-warning mx-auto text-center lead w-25" role="alert">
+        <h4 class="alert-heading">You won this auction, {{ context.winner|capfirst }}!</h4>
+    </div>
+    {% endif %} {% if context.closed_status is not None %}
+    <div class="alert alert-danger mx-auto text-center lead w-25" role="alert">
+        <h4 class="alert-heading">This auction is closed</h4>
+    </div>
+    {% endif %}
+</div>
+<h1 class="display-3 text-center text-primary mt-3 mb-2">{{ context.listing.listing_title }}</h1>
+<hr class="w-75">
+<div class="container d-flex">
+    <figure class="figure">
+        {% if context.listing.listing_img %}
+        <img src="{{ context.listing.listing_img }}" alt="{{ context.listing.listing_title }}" title="{{ context.listing.listing_title }}" class="img-responsive" style="width:30rem;"> {% else %}
+        <img src="https://res.cloudinary.com/angelrodriguez/image/upload/v1608836297/cs50_commerce_project/bicycle-emoji.svg" alt="default image" title="default image" class="img-responsive" style="width:30rem;"><span class="lead">Default. No Image Posted.</span>        {% endif %}
+        <figcaption class="figure-caption">Listed By: {{ context.listing.listing_owner|capfirst }}</figcaption>
+    </figure>
+    {% if context.listing.listing_owner == request.user %} {% endif %}
+    <div class="container ml-4 border-right">
+        {% if context.winner and context.closed_status is not None %}
+        <label class="figure-caption">Winner!</label> {% elif context.bids %}
+        <label class="figure-caption">Highest Bid</label> {% else %}
+        <label class="figure-caption">Starting Price</label> {% endif %} {% if context.highest_bidder is not None %}
+        <em class="text-danger"> ~ {{ context.highest_bidder }}</em> {% endif %}
+        <p class="display-4">${{ context.highest_bid|floatformat:2|intcomma }}</p>
+
+        <hr>
+
+        <p class="">{{ context.listing.listing_description }}</p>
+        <span class="badge bg-primary text-light">Category: {{ context.listing.category|capfirst }}</span>
+        <small></small>
+    </div>
+    <div class="container">
+        {% if context.item %}
+        <form action="{% url 'auctions:watchlistswitch' context.listing.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value="{{ context.listing.pk }}" name="listing">
+            <input type="submit" value="Remove From Watchlist" class="btn btn-outline-danger">
+        </form>
+        {% else %}
+        <form action="{% url 'auctions:watchlistswitch' context.listing.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value="{{ context.listing.pk }}" name="listing">
+            <input type="submit" value="Add To Watchlist" class="btn btn-outline-success">
+        </form>
+        {% endif %}
+
+        <br/>
+        <hr>
+        <br/> {% if context.closed_status is None %}
+        <form action="" method="POST" id="formBid">
+            {% csrf_token %}
+            <div class="input-group mb-4 w-75">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                </div>
+                <input type="hidden" id="form_type" name="form_type" value="form_bid">
+                <input type="number" class="form-control" name="bid_amount" placeholder="{{ context.highest_bid|floatformat:2|intcomma }}" value="" aria-label="bid_amount">
+            </div>
+            <input type="submit" value="Submit Your Bid" class="btn btn-primary">
+        </form>
+        {% if context.listing.listing_owner == request.user %}
+        <br/>
+        <hr>
+        <form action="" method="POST" id="formClose" class="mt-4">
+            {% csrf_token %}
+            <small class="text-danger">Select 'Yes' and 'Close Listing' button to close bidding on this item.</small>
+            <br/>
+            <br/>
+            <div class="input-group w-50">
+                {{ context.close_form.as_p }}
+            </div>
+
+            <input type="hidden" id="form_type" name="form_type" value="form_close">
+            <input type="submit" value="Close Listing" class="btn btn-danger mt-2">
+        </form>
+        {% endif %} {% endif %}
+    </div>
+</div>
+<hr class="w-75">
+<div class="container">
+    <h3 class="text-info">Comments Section</h3>
+    <form action="" method="POST" id="formComment" class="mt-4">
+        {% csrf_token %} {{ context.comment_form.as_p }}
+
+        <input type="hidden" id="form_type" name="form_type" value="form_comment">
+        <input type="submit" value="Post Comment" class="btn btn-info">
+    </form>
+    {% if context.comments %}
+    <div class="alert alert-primary lead w-75 mt-3" role="alert">
+        <h4 class="alert-heading">{{ context.comments|length }} comment{{context.comments|pluralize:"...,s..."}}</h4>
+    </div>
+    {% endif %} {% for comment in context.comments %}
+
+    <div class="card w-75 mt-3">
+        <div class="card-body">
+            <blockquote class="blockquote">
+                <h6 class="mb-0">{{ comment.content }}</h6>
+            </blockquote>
+            <hr>
+            <small><cite title="date time">Posted {{ comment.timestamp }}</cite></small>
+            <footer class="blockquote-footer">by <cite title="Source Title">{{ comment.user|capfirst }}</cite></footer>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
