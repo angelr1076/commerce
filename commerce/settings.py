@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
 from django.contrib.messages import constants as messages
+import environ
+import django_heroku
+import os
+from pathlib import Path
 
 
 MESSAGE_TAGS = {
@@ -25,18 +28,20 @@ MESSAGE_TAGS = {
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+env = environ.Env()
+# Read the env file
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6ps8j!crjgrxt34cqbqn7x&b3y%(fny8k8nh21+qa)%ws3fh!q'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG_VALUE")
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['commerce-django.herokuapp.com']
 
 # Application definition
 
