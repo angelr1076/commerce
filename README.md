@@ -1,4 +1,4 @@
-I've been pushing these products pretty much at completion since I've been developing in the Cloud 9 IDE which already has version control. I then migrate these projects to my local environment and push from VS Code.
+I've been pushing these projects pretty much at completion since I've been developing in the Cloud 9 IDE which already has version control. I then migrate these projects to my local environment and push from VS Code.
 
 # Commerce
 
