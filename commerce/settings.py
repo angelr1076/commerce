@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 from django.contrib.messages import constants as messages
-import django_heroku
+# import django_heroku
 import environ
 import os
 from pathlib import Path
@@ -41,7 +41,10 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG_VALUE")
 
-ALLOWED_HOSTS = ['commerce-django.herokuapp.com']
+ALLOWED_HOSTS = ['*']
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # Application definition
 
@@ -149,4 +152,4 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL = '/login/'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
