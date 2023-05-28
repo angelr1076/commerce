@@ -15,7 +15,7 @@
                 <img src="{{ item.listing_img }}" alt="{{ item.listing_title }}" title="{{ item.listing_title }}" class="card-img-top m-0" style="border-radius:0;"> {% else %}
                 <img src="https://res.cloudinary.com/angelrodriguez/image/upload/v1608836297/cs50_commerce_project/bicycle-emoji.svg" alt="default image" title="default image" class="card-img-top" style="border-radius:0;">
                 <span class="lead text-center">Default. No Image Posted.</span> {% endif %}
-                <h4 class="card-title text-center text-white bg-dark p-1">{{ item.listing_title }}</h4>
+                <h4 class="card-title text-center text-white bg-dark p-1 mb-3">{{ item.listing_title }}</h4>
                 <div class="card-body mx-auto">
 
                     <p class="figure-caption text-center"><em>Listed By: {{ item.listing_owner|capfirst }}</em></p>
