@@ -2,6 +2,8 @@
 
 Design an eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
 
+[View Live](https://web-production-c0b7.up.railway.app/login/)
+
 # Specification
 
 Complete the implementation of your auction site. You must fulfill the following requirements:
