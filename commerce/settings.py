@@ -112,16 +112,24 @@ PGPASSWORD = env("PGPASSWORD")
 PGHOST = env("PGHOST")
 PGPORT = env("PGPORT")
 
+# Live
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'URL': DATABASE_URL,
+#         'NAME': PGDATABASE,
+#         'USER': PGUSER,
+#         'PASSWORD': PGPASSWORD,
+#         'HOST': PGHOST,
+#         'PORT': PGPORT,
+#     }
+# }
 
+# Test
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL': DATABASE_URL,
-        'NAME': PGDATABASE,
-        'USER': PGUSER,
-        'PASSWORD': PGPASSWORD,
-        'HOST': PGHOST,
-        'PORT': PGPORT,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
