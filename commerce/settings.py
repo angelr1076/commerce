@@ -41,7 +41,9 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG_VALUE")
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://web-production-3e87b.up.railway.app/']
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -105,25 +107,25 @@ WSGI_APPLICATION = 'commerce.wsgi.application'
 #     }
 # }
 
-DATABASE_URL = env("DATABASE_URL")
-PGDATABASE = env("PGDATABASE")
-PGUSER = env("PGUSER")
-PGPASSWORD = env("PGPASSWORD")
-PGHOST = env("PGHOST")
-PGPORT = env("PGPORT")
+# DATABASE_URL = env("DATABASE_URL")
+# PGDATABASE = env("PGDATABASE")
+# PGUSER = env("PGUSER")
+# PGPASSWORD = env("PGPASSWORD")
+# PGHOST = env("PGHOST")
+# PGPORT = env("PGPORT")
 
 # Live
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'URL': DATABASE_URL,
-#         'NAME': PGDATABASE,
-#         'USER': PGUSER,
-#         'PASSWORD': PGPASSWORD,
-#         'HOST': PGHOST,
-#         'PORT': PGPORT,
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'URL': DATABASE_URL,
+        'NAME': PGDATABASE,
+        'USER': PGUSER,
+        'PASSWORD': PGPASSWORD,
+        'HOST': PGHOST,
+        'PORT': PGPORT,
+    }
+}
 
 # Test
 DATABASES = {
