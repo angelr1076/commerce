@@ -42,7 +42,8 @@ SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key-for-development")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG_VALUE", default=False)
 
-ALLOWED_HOSTS = ['web-production-3e87b.up.railway.app', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['web-production-3e87b.up.railway.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['bidstrocity.up.railway.app']
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
