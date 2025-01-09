@@ -14,6 +14,7 @@ from django.contrib.messages import constants as messages
 # import django_heroku
 import environ
 import os
+import dj_database_url
 from pathlib import Path
 
 
@@ -36,13 +37,12 @@ environ.Env.read_env()
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key-for-development")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG_VALUE")
+DEBUG = env.bool("DEBUG_VALUE", default=False)
 
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['https://web-production-3e87b.up.railway.app/']
+ALLOWED_HOSTS = ['web-production-3e87b.up.railway.app', 'localhost', '127.0.0.1']
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -99,40 +99,10 @@ WSGI_APPLICATION = 'commerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-# DATABASE_URL = env("DATABASE_URL")
-# PGDATABASE = env("PGDATABASE")
-# PGUSER = env("PGUSER")
-# PGPASSWORD = env("PGPASSWORD")
-# PGHOST = env("PGHOST")
-# PGPORT = env("PGPORT")
-
-# Live
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL': DATABASE_URL,
-        'NAME': PGDATABASE,
-        'USER': PGUSER,
-        'PASSWORD': PGPASSWORD,
-        'HOST': PGHOST,
-        'PORT': PGPORT,
-    }
-}
-
-# Test
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default=env("DATABASE_URL", default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}")
+    )
 }
 
 AUTH_USER_MODEL = 'auctions.User'
@@ -174,6 +144,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware') 
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # For images in ckeditor
