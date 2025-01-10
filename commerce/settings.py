@@ -41,10 +41,10 @@ SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key-for-development")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG_VALUE", default=False)
+print(f"DEBUG is set to: {DEBUG}")
 
-ALLOWED_HOSTS = ['bidstrocity.up.railway.app', 'localhost', '127.0.0.1']
-# ALLOWED_HOSTS = ['bidstrocity.up.railway.app']
-
+ALLOWED_HOSTS = ['bidstrocity.up.railway.app']
+# ALLOWED_HOSTS = ['*']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -64,13 +64,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'commerce.urls'
@@ -103,9 +103,12 @@ WSGI_APPLICATION = 'commerce.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 DATABASES = {
     'default': dj_database_url.config(
-        default=env("DATABASE_URL", default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}")
+        default=env("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True,  # Enforce SSL
     )
 }
+
 
 AUTH_USER_MODEL = 'auctions.User'
 
@@ -141,6 +144,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+# SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -154,6 +163,5 @@ MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # For images in ckeditor
 MEDIA_URL = '/media/'
-
 
 LOGIN_URL = '/login/'
