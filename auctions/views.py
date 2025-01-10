@@ -114,36 +114,38 @@ def not_found(request):
     return render(request, 'auctions/error.html')
 
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import ListingForm
+from .models import Listing, User
+
 @login_required
 def add_listing(request):
-    user = User.objects.get(pk=request.user.id)
-    listings = Listing.objects.filter(category=category)
+    user = request.user
 
     if request.method == "GET":
         form = ListingForm()
-        return render(request, "auctions/addlisting.html", {"form": form, "listings": listings})
+        return render(request, "auctions/addlisting.html", {"form": form})
+
     else:
-        try:
-            form = ListingForm(request.POST, request.FILES)
-            newlisting = form.save(commit=False)
-            newlisting.listing_owner = user
-            user = request.user
-            if form.is_valid():
-                price = request.POST.get("starting_price")
-                # price = int(get_price)
-                name = request.POST.get("listing_title")
-                description = request.POST.get("listing_description")
-                image = request.POST.get("listing_img")
-                listing_category = request.POST.get("category")
+        form = ListingForm(request.POST, request.FILES)
 
-                Listing.objects.create(
-                    listing_owner=user, listing_title=name, listing_description=description, listing_img=image, category=listing_category, starting_price=price)
+        if form.is_valid():
+            try:
+                newlisting = form.save(commit=False)
+                newlisting.listing_owner = user
+                newlisting.save()
 
-                messages.info(request, "Your listing has been saved.")
+                messages.success(request, "Your listing has been saved.")
                 return redirect("auctions:index")
-        except ValueError:
-            messages.error(
-                request, "There was an error saving your listing.")
+
+            except Exception as e:
+                messages.error(request, f"There was an error saving your listing: {e}")
+                return render(request, "auctions/addlisting.html", {"form": form})
+
+        else:
+            messages.error(request, "There was an error with the form. Please correct it.")
             return render(request, "auctions/addlisting.html", {"form": form})
 
 
