@@ -5,17 +5,22 @@
 
 <head>
     <title>{% block title %}Bidstrocity{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="{% static 'auctions/shop-store-icon.ico' %}">
-    {% load static %}
 </head>
 
-<body class="p-0 mb-3 font-weight-bold" style="font-family: 'Schibsted Grotesk', sans-serif;">
+<body class="p-0 mb-3 font-weight-bold" style="">
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-1">
         <div class="container-fluid">
-            <a class="navbar-brand pr-5" href="{% url 'auctions:index' %}"><span class="font-weight-light" style="font-size:1.9rem"><span class="text-primary">Bid</span><span class="text-danger">stro</span><span class="text-warning">city</span></span></a>
+            <a class="navbar-brand pr-5" href="{% url 'auctions:index' %}">
+                <span class="font-weight-light" style="font-size:1.5rem;">
+                    <span class="title text-primary">Bid</span>
+                    <span class="title text-danger">stro</span>
+                    <span class="title text-warning">city</span>
+                </span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>

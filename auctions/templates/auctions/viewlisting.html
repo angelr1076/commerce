@@ -14,7 +14,7 @@
     </div>
     {% endif %}
 </div>
-<h1 class="display-3 text-center text-primary mt-3 mb-2">{{ context.listing.listing_title }}</h1>
+<h1 class="text-center text-primary mt-3 mb-2">{{ context.listing.listing_title }}</h1>
 <hr class="w-75">
 <div class="container d-flex">
     <figure class="figure">
@@ -87,12 +87,12 @@
 </div>
 <hr class="w-75">
 <div class="container">
-    <h3 class="text-info">Comments Section</h3>
+    <h3 class="">Comments</h3>
     <form action="" method="POST" id="formComment" class="mt-4">
         {% csrf_token %} {{ context.comment_form.as_p }}
 
         <input type="hidden" id="form_type" name="form_type" value="form_comment">
-        <input type="submit" value="Post Comment" class="btn btn-info">
+        <input type="submit" value="Post" class="btn btn-info">
     </form>
     {% if context.comments %}
     <div class="alert alert-primary lead w-75 mt-3" role="alert">
