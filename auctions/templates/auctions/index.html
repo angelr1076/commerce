@@ -3,25 +3,20 @@
 {% load static %}
 {% load humanize %}
 
-<!--Newest Listings-->
-<div class="jumbotron rounded-0 text-center pt-4 pl-0 pr-0">
-    <h1 class="display-1">
-        <span class="font-weight-light">
-            <span class="text-primary">Bid</span>
-            <span class="text-danger">stro</span>
-            <span class="text-warning">city</span>
-        </span>
-    </h1>
-    <h3 class="display-5 shadow-sm bg-light text-dark p-2">New Listings</h3>
+<div class="jumbotron text-center pt-4 px-0">
+    <span class="display-1 font-weight-light fs-4 fs-md-3 responsive-title">
+        <span class="text-primary">Bid</span><span class="text-danger">stro</span><span class="text-warning">city</span>
+    </span>
+    <h3 class="shadow-sm bg-light text-dark p-2">New Listings</h3>
     <hr class="my-4">
-    <div class="d-flex flex-wrap justify-content-around">
+    <div class="d-flex flex-wrap justify-content-center">
         {% for item in context.recent %}
-        <a href="{% url 'auctions:viewlisting' item.id %}" class="text-decoration-none pt-2" style="color:black;">
-            <div class="card shadow-lg border-0 rounded-0 m-2" style="width:20rem;overflow:hidden;">
+        <a href="{% url 'auctions:viewlisting' item.id %}" class="text-decoration-none pt-2 text-dark">
+            <div class="card shadow-lg border-0 m-2" style="width:18rem; height: 600px; overflow: hidden;">
                 {% if context.w_list %}
                 {% for w_item in context.w_list %}
                 {% if w_item.listing == item %}
-                <h6 class="card-title text-center bg-primary text-white p-1 m-0 w-100">On Your Watchlist</h6>
+                <h6 class="card-title text-center bg-primary text-white p-1 w-100">On Your Watchlist</h6>
                 {% endif %}
                 {% endfor %}
                 {% endif %}
@@ -37,20 +32,18 @@
                     {% endif %}
                 </div>
                 <h4 class="card-title text-center text-white bg-dark p-1 mb-3">{{ item.listing_title }}</h4>
-                <div class="card-body mx-auto">
-                    <p class="figure-caption text-center"><em>Listed By: {{ item.listing_owner|capfirst }}</em></p>
-                    <p class="figure-caption text-center ">Added: {{ item.created_on }}</p>
+                <div class="card-body text-center">
+                    <p><em>Listed By: {{ item.listing_owner|capfirst }}</em></p>
+                    <p>Added: {{ item.created_on }}</p>
                     <hr>
-                    <h5 class="lead text-center">Starting Price: ${{ item.starting_price|floatformat:2|intcomma }}</h5>
-                    <h5 class="text-center">Last Bid:
+                    <h5>Starting Price: ${{ item.starting_price|floatformat:2|intcomma }}</h5>
+                    <h5>
                         {% if item.current_price == 0 %}
                         <mark>No Bids Yet.</mark>
                         {% else %}
-                        <mark class="text-center"> ${{ item.current_price|floatformat:2|intcomma }} </mark>
+                        <mark>${{ item.current_price|floatformat:2|intcomma }}</mark>
                         {% endif %}
                     </h5>
-                    <br />
-                    <span class="">{{ item.listing_description|truncatechars:100 }}</span>
                 </div>
             </div>
         </a>
@@ -58,49 +51,45 @@
     </div>
 </div>
 
-<!--All Listings-->
 <h1 class="display-5 text-center bg-dark text-light">
-    <span class="">{{ context.listings|length }}</span> Active Listings
+    <span>{{ context.listings|length }}</span> Active Listings
 </h1>
 <hr class="my-4">
-<div class="d-flex flex-wrap justify-content-around">
+<div class="d-flex flex-wrap justify-content-center">
     {% for item in context.listings %}
     {% if item not in context.recent %}
-    <a href="{% url 'auctions:viewlisting' item.id %}" class="text-decoration-none pb-4" style="color:black;">
-        <div class="card shadow-lg border-0 rounded-0 m-2" style="width:28rem;height:100%;overflow:hidden;">
+    <a href="{% url 'auctions:viewlisting' item.id %}" class="text-decoration-none pb-4 text-dark">
+        <div class="card shadow-lg border-0 m-2" style="width:18rem; height: 400px; overflow: hidden;">
             {% if context.w_list %}
             {% for w_item in context.w_list %}
             {% if w_item.listing == item %}
-            <h5 class="card-title text-center bg-primary text-white p-1 m-0 w-100">On Your Watchlist</h5>
+            <h5 class="card-title text-center bg-primary text-white p-1">On Your Watchlist</h5>
             {% endif %}
             {% endfor %}
             {% endif %}
-            <div class="image-container" style="width: 100%; height: 250px; overflow: hidden;">
+            <div class="image-container" style="width: 100%; height: 200px; overflow: hidden;">
                 {% if item.listing_img %}
                 <img src="{{ item.listing_img }}" alt="{{ item.listing_title }}" title="{{ item.listing_title }}"
-                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;">
+                    style="width: 100%; height: 100%; object-fit: scale-down; object-position: center;">
                 {% else %}
                 <img src="https://res.cloudinary.com/angelrodriguez/image/upload/v1608836297/cs50_commerce_project/bicycle-emoji.svg"
                     alt="default image" title="default image"
-                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 0;">
-                <span class="lead text-center">Default. No Image Posted.</span>
+                    style="width: 100%; height: 100%; object-fit: contain; object-position: center;">
                 {% endif %}
             </div>
             <h4 class="card-title text-center text-white bg-dark p-1">{{ item.listing_title }}</h4>
-            <div class="card-body mx-auto">
-                <p class="figure-caption text-center "><em>Listed By: {{ item.listing_owner|capfirst }}</em></p>
-                <p class="figure-caption text-center ">Added: {{ item.created_on }}</p>
+            <div class="card-body text-center">
+                <p><em>Listed By: {{ item.listing_owner|capfirst }}</em></p>
+                <p>Added: {{ item.created_on }}</p>
                 <hr>
-                <h5 class="lead text-center">Starting Price: ${{ item.starting_price|floatformat:2|intcomma }}</h5>
-                <h5 class="lead text-center">Last Bid:
+                <h5>Starting Price: ${{ item.starting_price|floatformat:2|intcomma }}</h5>
+                <h5>
                     {% if item.current_price == 0 %}
-                    <mark><b>No Bids Yet.</b></mark>
+                    <mark>No Bids Yet.</mark>
                     {% else %}
-                    <mark class="text-center"> <b>${{ item.current_price|floatformat:2|intcomma }}</b></mark>
+                    <mark>${{ item.current_price|floatformat:2|intcomma }}</mark>
                     {% endif %}
                 </h5>
-                <br />
-                <span class="">{{ item.listing_description|truncatechars:200 }}</span>
             </div>
         </div>
     </a>

@@ -1,29 +1,35 @@
-{% extends "auctions/layout.html" %} {% block body %}
+{% extends "auctions/layout.html" %} {% block body %} {% load static %} {% load humanize %}
+
 <div class="container">
     <div class="row mt-5">
-        <div class="col">
-            <a class="navbar-brand" href="{% url 'auctions:index' %}"><span class="display-2 font-weight-light"><span class="text-primary">Bid</span><span class="text-danger">stro</span><span class="text-warning">city</span></span></a>
+        <div class="col-lg-6 col-md-12 text-center">
+            <a class="navbar-brand" href="{% url 'auctions:index' %}">
+                <span class="display-1 font-weight-light fs-4 fs-md-3 responsive-title">
+                    <span class="text-primary">Bid</span><span class="text-danger">stro</span><span class="text-warning">city</span>
+                </span>
+            </a>
             <p class="display-4 pt-3 text-primary">Login</p>
             <form action="{% url 'auctions:login' %}" method="POST">
                 <div class="form-group">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp">
+                        <input type="text" name="username" class="form-control" id="username">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" id="password">
                     </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-outline-primary btn-lg" value="Login">Sign In</button>
-                </div>
-                <small>Not registered? You can register for an account <a href="{% url 'auctions:register' %}">here</a>.</small>
+                <button type="submit" class="btn btn-outline-primary btn-lg w-100">Sign In</button>
+                <small>Not registered? You can register for an account <a
+                        href="{% url 'auctions:register' %}">here</a>.</small>
             </form>
         </div>
-        <div class="col mt-5">
-            <img src="https://res.cloudinary.com/angelrodriguez/image/upload/v1608730069/cs50_commerce_project/Online_shopping_SVG.svg" class="img-fluid" alt="Responsive image" title="online shopping">
+        <div class="col-lg-6 col-md-12 mt-5">
+            <img src="https://res.cloudinary.com/angelrodriguez/image/upload/v1608730069/cs50_commerce_project/Online_shopping_SVG.svg"
+                class="img-fluid" alt="Responsive image">
         </div>
     </div>
-</div> {% endblock %}
+</div>
+{% endblock %}

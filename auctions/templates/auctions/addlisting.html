@@ -1,16 +1,17 @@
-{% extends "auctions/layout.html" %} {% block body %}
+{% extends "auctions/layout.html" %} {% block body %} {% load static %} {% load humanize %}
+
 <h1 class="display-5 text-center mb-5 bg-primary text-light">Add Listing</h1>
-<div class="container mt-5 p-4 shadow-lg" style="background: url('https://res.cloudinary.com/angelrodriguez/image/upload/v1608819474/cs50_commerce_project/undraw_web_shopping_dd4l_lighter.svg'); background-size:cover;">
+<div class="container mt-5 p-4 shadow-lg bg-light rounded">
     <form action="{% url 'auctions:addlisting' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %} {{ form.as_p }}
         <label for="starting_price">Starting Price:</label>
-        <div class="input-group mb-3 w-75">
+        <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
             </div>
-            <input type="number" class="form-control" name="starting_price" placeholder="1.00" aria-label="Amount (to the nearest dollar)">
+            <input type="number" class="form-control" name="starting_price" placeholder="1.00">
         </div>
-        <input class="btn btn-outline-primary btn-lg" type="submit" value="Submit">
+        <input class="btn btn-outline-primary btn-lg w-100" type="submit" value="Submit">
     </form>
 </div>
 {% endblock %}

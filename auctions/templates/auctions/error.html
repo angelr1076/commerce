@@ -1,13 +1,12 @@
-{% extends "encyclopedia/layout.html" %}{ % block title % } Page Not Found Error { % endblock %} {% block body %}
+{% extends "auctions/layout.html" %} {% block body %} {% load static %} {% load humanize %}
 
-<div class="container mt-5">
-
+<div class="container text-center mt-5">
     <h3>Page Not Found - Error 404</h3>
-
-    <div class="row">
-        <img src="https://res.cloudinary.com/angelrodriguez/image/upload/v1608820017/cs50_commerce_project/undraw_warning_cyit.svg" title="Error Page" alt="Not Found">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <img src="https://res.cloudinary.com/angelrodriguez/image/upload/v1608820017/cs50_commerce_project/undraw_warning_cyit.svg"
+                alt="Not Found" class="img-fluid">
+        </div>
     </div>
-
 </div>
-
 {% endblock %}
