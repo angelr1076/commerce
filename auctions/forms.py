@@ -14,11 +14,11 @@ class ListingForm(ModelForm):
             'Image URL'), 'closed_auction': ('Closed Auction?')}
 
         widgets = {
-            'listing_title': forms.TextInput(attrs={'class': 'form-control', 'style': 'width:75%', 'placeholder': 'Think of a name that sells your product.'}),
-            'listing_description': forms.Textarea(attrs={'class': 'form-control', 'style': 'width:75%', 'placeholder': 'Tell potential bidders more about this item...'}),
-            'listing_img': forms.TextInput(attrs={'class': 'form-control', 'style': 'width:75%', 'placeholder': 'https://cutebunnyrabbits.jpg'}),
-            'category': forms.Select(attrs={'class': 'form-control text-capitalize', 'style': 'width:75%'}),
-            'closed_auction': forms.HiddenInput(attrs={'class': 'form-control', 'style': 'width:75%'}),
+            'listing_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Think of a name that sells your product.'}),
+            'listing_description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Tell potential bidders more about this item...'}),
+            'listing_img': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'https://cutebunnyrabbits.jpg'}),
+            'category': forms.Select(attrs={'class': 'form-control text-capitalize'}),
+            'closed_auction': forms.HiddenInput(attrs={'class': 'form-control'}),
         }
 
 

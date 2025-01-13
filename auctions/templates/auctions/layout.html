@@ -60,6 +60,10 @@
                         </li>
                     </ul>
                 </div>
+                {% else %}
+                <li class="nav-item pl-3">
+                    <a class="nav-link border-left" href="{% url 'auctions:login' %}">Login</a>
+                </li>
                 {% endif %}
             </div>
         </div>
