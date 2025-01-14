@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from datetime import datetime
 from .models import User, Listing, Watchlist, Bid, categories
 
 def add_listings_to_layout(request):
@@ -37,3 +38,8 @@ def add_watchlist_to_layout(request):
 def category_count(request):
     category_count = len(categories)
     return { 'category_count': category_count }
+
+def current_year(request):
+    return {
+        'current_year': datetime.now().year
+    }

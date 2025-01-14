@@ -11,8 +11,7 @@
     <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'auctions/shop-store-icon.ico' %}">
 </head>
-
-<body class="p-0 mb-3 font-weight-bold">
+<body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-1">
         <div class="container-fluid">
             <a class="navbar-brand pr-5" href="{% url 'auctions:index' %}">
@@ -69,8 +68,76 @@
         </div>
     </nav>
 
-    {% include 'auctions/messages.html' %}
-    {% block body %} {% endblock %}
+    <main class="flex-grow-1">
+        {% include 'auctions/messages.html' %}
+        {% block body %}{% endblock %}
+    </main>
+
+    <section class="branding-section py-5 mt-5">
+        <hr class="border-2 border-top mb-4" />
+        <div class="container">
+            <div class="row text-center text-md-start">
+                <!-- Establishment -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold">Establishment</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">About Us</a></li>
+                        <li><a href="#" class="text-light">Find Locations</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Brand -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold">Brand</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Press</a></li>
+                        <li><a href="#" class="text-light">Blog</a></li>
+                        <li><a href="#" class="text-light">Reviews</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Support -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold">Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Shipping/Return Policy</a></li>
+                        <li><a href="#" class="text-light">Repairs</a></li>
+                        <li><a href="#" class="text-light">Warranty</a></li>
+                        <li><a href="#" class="text-light">FAQ</a></li>
+                        <li><a href="#" class="text-light">Contact Us</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Contact Us -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><span class="d-block text-light"><i class="fa fa-phone"></i> 1-800-555-5555</span></li>
+                        <li><span class="d-block text-light"><i class="fa fa-clock"></i> 9am-5pm EST, M-F</span></li>
+                        <li><span class="d-block text-light"><i class="fa fa-clock"></i> 9am-1pm EST, Sat</span></li>
+                        <li><span class="d-block text-light"><i class="fa fa-times"></i> Closed Sundays</span></li>
+                    </ul>
+                </div>
+            </div>
+    
+            <hr class="my-4" />
+
+            <!-- Subscription Form -->
+            <div class="row text-center">
+                <div class="col-md-6 mx-auto">
+                    <form class="d-flex justify-content-center">
+                        <input type="email" class="form-control me-2" placeholder="Enter your email here">
+                        <button class="btn btn-primary" type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-dark text-light text-center py-3">
+        <div class="container">
+            <p class="m-0">Angel Rodriguez &copy; {{ current_year }}</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
         integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"

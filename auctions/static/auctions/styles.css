@@ -25,6 +25,23 @@ body.font-weight-bold {
   overflow: hidden;
 }
 
+.branding-section {
+  background-color: #343a40;
+  color: #fff;
+}
+
+footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 0;
+}
+
 @media (max-width: 600px) {
   .responsive-title {
     font-size: 1rem;

@@ -92,6 +92,7 @@ TEMPLATES = [
                 'auctions.context_processors.add_listings_to_layout',
                 'auctions.context_processors.add_closed_to_layout',
                 'auctions.context_processors.category_count',
+                'auctions.context_processors.current_year',
             ],
         },
     },

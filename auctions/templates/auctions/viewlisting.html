@@ -47,12 +47,12 @@
         {% if context.item %}
         <form action="{% url 'auctions:watchlistswitch' context.listing.pk %}" method="POST">
             {% csrf_token %}
-            <input type="submit" value="Remove From Watchlist" class="btn btn-danger mt-2 w-100">
+            <input type="submit" value="Remove From Watchlist" class="btn btn-danger mt-2 w-25">
         </form>
         {% else %}
         <form action="{% url 'auctions:watchlistswitch' context.listing.pk %}" method="POST">
             {% csrf_token %}
-            <input type="submit" value="Add To Watchlist" class="btn btn-success mt-2 w-100">
+            <input type="submit" value="Add To Watchlist" class="btn btn-success mt-2 w-25">
         </form>
         {% endif %}
     </div>
