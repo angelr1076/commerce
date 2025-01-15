@@ -79,7 +79,7 @@ class Watchlist(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, null=True)
-    content = models.TextField(max_length=1200, null=True)
+    content = models.TextField(max_length=500, null=True)
     timestamp = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
