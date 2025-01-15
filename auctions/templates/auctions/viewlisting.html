@@ -38,23 +38,81 @@
         {% endif %}
         <figcaption class="figure-caption">Listed By: {{ context.listing.listing_owner|capfirst }}</figcaption>
     </figure>
+<div class="container">
+    <h3>${{ context.highest_bid|floatformat:2|intcomma }}</h3>
+    <p>{{ context.listing.listing_description }}</p>
+    <span class="badge bg-primary text-light mb-3">Category: {{ context.listing.category|capfirst }}</span>
+    <br />
+    <div class="row">
+        <div class="col-md-4 d-flex align-items-end text-center mt-2 mb-2">
+            {% if context.item %}
+            <form action="{% url 'auctions:watchlistswitch' context.listing.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Remove From Watchlist" class="btn btn-danger btn-md w-100">
+            </form>
+            {% else %}
+            <form action="{% url 'auctions:watchlistswitch' context.listing.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Add To Watchlist" class="btn btn-success btn-md w-100">
+            </form>
+            {% endif %}
+        </div>
 
-    <div class="container">
-        <h3>${{ context.highest_bid|floatformat:2|intcomma }}</h3>
-        <p>{{ context.listing.listing_description }}</p>
-        <span class="badge bg-primary text-light">Category: {{ context.listing.category|capfirst }}</span>
-        <br />
-        {% if context.item %}
-        <form action="{% url 'auctions:watchlistswitch' context.listing.pk %}" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="Remove From Watchlist" class="btn btn-danger mt-2 btn-md">
-        </form>
-        {% else %}
-        <form action="{% url 'auctions:watchlistswitch' context.listing.pk %}" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="Add To Watchlist" class="btn btn-success mt-2 btn-md">
-        </form>
-        {% endif %}
+        <div class="col-md-4 d-flex align-items-end text-center mt-2 mb-2">
+            {% if context.closed_status is None %}
+            <form action="" method="POST" id="formBid">
+                {% csrf_token %}
+                <div class="input-group  mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">$</span>
+                    </div>
+                    <input type="hidden" id="form_type" name="form_type" value="form_bid">
+                    <input type="number" class="form-control" name="bid_amount"
+                        placeholder="Current: {{ context.highest_bid|floatformat:2|intcomma }}" value="" aria-label="bid_amount">
+                </div>
+                <input type="submit" value="Submit Bid" class="btn btn-primary w-100">
+            </form>
+            {% endif %}
+        </div>
+        <div class="col-md-4 d-flex align-items-end text-center mt-2 mb-2">
+            {% if context.closed_status is None and context.listing.listing_owner == request.user %}
+            <form action="" method="POST" id="formClose" class="">
+                {% csrf_token %}
+                <div class="input-group">
+                    {{ context.close_form.as_p }}
+                </div>
+                <input type="hidden" id="form_type" name="form_type" value="form_close">
+                <input type="submit" value="Close Listing" class="btn btn-danger w-100">
+            </form>
+            {% endif %}
+        </div>
+        </div>
     </div>
+    <hr class="w-75">
+    <div class="container">
+        <h3 class="text-info">Comments Section</h3>
+        <form action="" method="POST" id="formComment" class="mt-4">
+            {% csrf_token %} {{ context.comment_form.as_p }}
+    
+            <input type="hidden" id="form_type" name="form_type" value="form_comment">
+            <input type="submit" value="Post Comment" class="btn btn-info">
+        </form>
+        {% if context.comments %}
+        <div class="alert alert-primary lead w-75 mt-3" role="alert">
+            <h4 class="alert-heading">{{ context.comments|length }} comment{{context.comments|pluralize:"...,s..."}}</h4>
+        </div>
+        {% endif %} {% for comment in context.comments %}
+    
+        <div class="card w-75 mt-3">
+            <div class="card-body">
+                <blockquote class="blockquote">
+                    <h6 class="mb-0">{{ comment.content }}</h6>
+                </blockquote>
+                <hr>
+                <small><cite title="date time">Posted {{ comment.timestamp }}</cite></small>
+                <footer class="blockquote-footer">by <cite title="Source Title">{{ comment.user|capfirst }}</cite></footer>
+            </div>
+        </div>
+        {% endfor %}
 </div>
 {% endblock %}
