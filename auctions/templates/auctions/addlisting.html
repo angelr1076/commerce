@@ -1,6 +1,6 @@
 {% extends "auctions/layout.html" %} {% block body %} {% load static %} {% load humanize %}
 
-<h1 class="display-5 text-center mb-5 bg-primary text-light">Add Listing</h1>
+<h3 class="fw-bold text-center mb-5 bg-primary text-light p-3">Add Listing</h3>
 <div class="container mt-5 p-4 shadow-lg bg-light rounded">
     <form action="{% url 'auctions:addlisting' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %} {{ form.as_p }}

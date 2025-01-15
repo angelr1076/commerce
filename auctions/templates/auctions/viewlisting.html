@@ -2,26 +2,26 @@
 
 <div class="container d-flex flex-wrap mt-5 p-2 justify-content-center">
     {% if context.item %}
-    <div class="alert alert-success text-center lead w-100">
-        <h4 class="alert-heading">{{ context.listing.listing_title }} is on your watchlist.</h4>
+    <div class="alert alert-success text-center w-100 fw-lighter">
+        <h5 class="alert-heading">This item is on your watchlist.</h5>
     </div>
     {% endif %}
     {% if context.winner == request.user %}
-    <div class="alert alert-warning text-center lead w-100">
-        <h4 class="alert-heading">You won this auction, {{ context.winner|capfirst }}!</h4>
+    <div class="alert alert-warning text-center w-100 fw-lighter">
+        <h5 class="alert-heading">You won this auction, {{ context.winner|capfirst }}!</h5>
     </div>
     {% endif %}
     {% if context.closed_status is not None %}
-    <div class="alert alert-danger text-center lead w-100">
-        <h4 class="alert-heading">This auction is closed</h4>
+    <div class="alert alert-danger text-center w-100 fw-lighter">
+        <h5 class="alert-heading">This auction is closed</h5>
     </div>
     {% endif %}
 </div>
 
-<h1 class="display-5 text-center text-primary mt-3 mb-2">{{ context.listing.listing_title }}</h1>
+<h3 class="fw-bold text-center text-primary mt-3 mb-2">{{ context.listing.listing_title }}</h3>
 <hr class="w-75">
 
-<div class="container d-flex flex-wrap justify-content-around">
+<div class="container d-flex flex-wrap justify-content-around bg-light p-5">
     <figure class="figure">
         {% if context.listing.listing_img %}
         <div class="image-container" style="width: 100%; height: 500px; overflow: hidden;">

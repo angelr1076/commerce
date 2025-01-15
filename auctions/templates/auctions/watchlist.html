@@ -1,8 +1,8 @@
 {% extends "auctions/layout.html" %} {% block body %} {% load static %} {% load humanize %}
 
-<h1 class="display-5 text-center bg-warning text-dark py-3">
+<h3 class="fw-bold text-center bg-warning text-dark py-3 p-3">
     {{ context.listings|length }} Listing{{ context.listings|pluralize }} In Your Watchlist
-</h1>
+</h3>
 <hr class="my-4">
 <div class="d-flex flex-wrap justify-content-around">
     {% if context.listings %}

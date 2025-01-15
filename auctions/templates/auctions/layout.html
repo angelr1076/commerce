@@ -11,8 +11,8 @@
     <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'auctions/shop-store-icon.ico' %}">
 </head>
-<body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-1">
+<body class="d-flex flex-column min-vh-100 bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white p-1">
         <div class="container-fluid">
             <a class="navbar-brand pr-5" href="{% url 'auctions:index' %}">
                 <span class="display-5 font-weight-light fs-4 fs-md-3">
@@ -68,7 +68,7 @@
         </div>
     </nav>
 
-    <main class="flex-grow-1">
+    <main class="flex-grow-1 bg-white">
         {% include 'auctions/messages.html' %}
         {% block body %}{% endblock %}
     </main>

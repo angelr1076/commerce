@@ -1,9 +1,9 @@
 {% extends "auctions/layout.html" %} {% block body %} {% load static %} {% load humanize %}
 
-<h1 class="display-5 text-center bg-info text-white">Category: {{ context.category|capfirst }}</h1>
+<h3 class="fw-bold text-center bg-info text-white p-3">Category: {{ context.category|capfirst }}</h3>
 <hr class="my-4">
-<div class="container">
-    <div class="row">
+<div class="container ">
+    <div class="d-flex flex-wrap justify-content-center">
         {% if context.listings %}
         {% for item in context.listings %}
         {% if item.closed_auction == "No" %}

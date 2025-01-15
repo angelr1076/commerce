@@ -1,9 +1,9 @@
 {% extends "auctions/layout.html" %} {% block body %} {% load static %} {% load humanize %}
 
-<h1 class="display-5 text-center bg-danger text-white">{{ context.listings|length }} Closed Listing{{context.listings|length|pluralize }}</h1>
+<h3 class="fw-bold text-center bg-danger text-white p-3">{{ context.listings|length }} Closed Listing{{context.listings|length|pluralize }}</h3>
 <hr class="my-4">
 <div class="container">
-    <div class="row d-flex justify-content-center">
+    <div class="d-flex flex-wrap justify-content-center">
         {% if context.listings %}
         {% for item in context.listings %}
         <div class="col-md-4 col-sm-6 mb-4">

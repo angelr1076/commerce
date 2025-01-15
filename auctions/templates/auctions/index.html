@@ -3,11 +3,11 @@
 {% load static %}
 {% load humanize %}
 
-<div class="jumbotron text-center pt-4 px-0">
+<div class="jumbotron text-center pt-4 px-0 bg-white">
     <span class="display-1 font-weight-light fs-4 fs-md-3 responsive-title">
         <span class="text-primary">Bid</span><span class="text-danger">stro</span><span class="text-warning">city</span>
     </span>
-    <h3 class="shadow-sm bg-light text-dark p-2">New Listings</h3>
+    <h3 class="shadow-sm bg-light text-primary p-2">New Listings</h3>
     <hr class="my-4">
     <div class="d-flex flex-wrap justify-content-center">
         {% for item in context.recent %}
@@ -36,12 +36,12 @@
                     <p><em>Listed By: {{ item.listing_owner|capfirst }}</em></p>
                     <p>Added: {{ item.created_on }}</p>
                     <hr>
-                    <h5>Starting Price: ${{ item.starting_price|floatformat:2|intcomma }}</h5>
+                    <h5>Starting: ${{ item.starting_price|floatformat:2|intcomma }}</h5>
                     <h5>
                         {% if item.current_price == 0 %}
                         <mark>No Bids Yet.</mark>
                         {% else %}
-                        <mark>${{ item.current_price|floatformat:2|intcomma }}</mark>
+                        <mark>Current: ${{ item.current_price|floatformat:2|intcomma }}</mark>
                         {% endif %}
                     </h5>
                 </div>
@@ -51,11 +51,11 @@
     </div>
 </div>
 
-<h1 class="display-5 text-center bg-dark text-light">
+<h3 class="fw-bold text-center bg-dark text-light p-3">
     <span>{{ context.listings|length }}</span> Active Listings
-</h1>
+</h3>
 <hr class="my-4">
-<div class="d-flex flex-wrap justify-content-center">
+<div class="container d-flex flex-wrap justify-content-center">
     {% for item in context.listings %}
     {% if item not in context.recent %}
     <a href="{% url 'auctions:viewlisting' item.id %}" class="text-decoration-none pb-4 text-dark">

@@ -1,8 +1,8 @@
 {% extends "auctions/layout.html" %} {% block body %} {% load static %} {% load humanize %}
 
-<h1 class="display-5 text-center mb-5 bg-info text-white">{{ categories|length }} Categories</h1>
+<h3 class="fw-bold text-center mb-5 bg-info text-white p-3">{{ categories|length }} Categories</h3>
 <div class="container">
-    <div class="row">
+    <div class="d-flex flex-wrap justify-content-center">
         {% for item in categories %}
         <div class="col-md-4 col-sm-6 mb-4">
             <div class="list-group-item shadow-lg text-center border-0 py-5"
