@@ -12,7 +12,7 @@
     <div class="d-flex flex-wrap justify-content-center">
         {% for item in context.recent %}
         <a href="{% url 'auctions:viewlisting' item.id %}" class="text-decoration-none pt-2 text-dark">
-            <div class="card shadow-lg border-0 m-2" style="width:18rem; height: 600px; overflow: hidden;">
+            <div class="card shadow-lg border-0 m-2" style="width:18rem;overflow: hidden;">
                 {% if context.w_list %}
                 {% for w_item in context.w_list %}
                 {% if w_item.listing == item %}
@@ -59,7 +59,7 @@
     {% for item in context.listings %}
     {% if item not in context.recent %}
     <a href="{% url 'auctions:viewlisting' item.id %}" class="text-decoration-none pb-4 text-dark">
-        <div class="card shadow-lg border-0 m-2" style="width:18rem; height: 400px; overflow: hidden;">
+        <div class="card shadow-lg border-0 m-2" style="width:18rem;overflow: hidden;">
             {% if context.w_list %}
             {% for w_item in context.w_list %}
             {% if w_item.listing == item %}
