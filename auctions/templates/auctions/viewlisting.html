@@ -88,7 +88,7 @@
         </div>
         </div>
     </div>
-    <hr class="w-75">
+    <hr class="w-100">
     <div class="container">
         <h3 class="text-info">Comments Section</h3>
         <form action="" method="POST" id="formComment" class="mt-4">
@@ -98,19 +98,19 @@
             <input type="submit" value="Post Comment" class="btn btn-info">
         </form>
         {% if context.comments %}
-        <div class="alert alert-primary lead w-75 mt-3" role="alert">
-            <h4 class="alert-heading">{{ context.comments|length }} comment{{context.comments|pluralize:"...,s..."}}</h4>
+        <div class="alert alert-primary lead mt-3" role="alert">
+            <h4 class="alert-heading">{{ context.comments|length }} comment{{context.comments|pluralize:"...,s"}}</h4>
         </div>
         {% endif %} {% for comment in context.comments %}
     
-        <div class="card w-75 mt-3">
+        <div class="card mt-3">
             <div class="card-body">
                 <blockquote class="blockquote">
                     <h6 class="mb-0">{{ comment.content }}</h6>
                 </blockquote>
                 <hr>
                 <small><cite title="date time">Posted {{ comment.timestamp }}</cite></small>
-                <footer class="blockquote-footer">by <cite title="Source Title">{{ comment.user|capfirst }}</cite></footer>
+                <footer class="blockquote-footer bg-light">by <cite title="Source Title">{{ comment.user|capfirst }}</cite></footer>
             </div>
         </div>
         {% endfor %}
