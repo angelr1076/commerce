@@ -21,7 +21,7 @@
 <h3 class="fw-bold text-center text-primary mt-3 mb-2">{{ context.listing.listing_title }}</h3>
 <hr class="w-75">
 
-<div class="container d-flex flex-wrap justify-content-around bg-light p-5">
+<div class="container d-flex flex-wrap justify-content-around bg-light p-3">
     <figure class="figure">
         {% if context.listing.listing_img %}
         <div class="image-container" style="width: 100%; height: 500px; overflow: hidden;">
@@ -90,7 +90,7 @@
     </div>
     <hr class="w-100">
     <div class="container">
-        <h3 class="text-info">Comments Section</h3>
+        <h4 class="text-info">Comments</h4>
         <form action="" method="POST" id="formComment" class="mt-4">
             {% csrf_token %} {{ context.comment_form.as_p }}
     
