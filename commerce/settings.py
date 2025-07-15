@@ -50,10 +50,11 @@ ALLOWED_HOSTS = [
     "bidstrocity.online",
     "www.bidstrocity.online",
     "boto858t.up.railway.app",
+    "127.0.0.1",
+    "localhost",
 ]
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-# ALLOWED_HOSTS = ['*']
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
